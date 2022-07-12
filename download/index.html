@@ -1,0 +1,44 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <title>Document</title>
+    <script>
+        function DownloadFile() {
+            file = input.files[0];
+            fr = new FileReader();
+            fr.readAsDataURL(file);
+    
+            var blob = new Blob([file], { type: "application/pdf" });
+    
+            var objectURL = window.URL.createObjectURL(blob);
+            console.log(objectURL);
+    
+            if (navigator.appVersion.toString().indexOf('.NET') > 0) {
+                window.navigator.msSaveOrOpenBlob(blob, 'myFileName.pdf');
+            } else {
+                var link = document.createElement('a');
+                link.href = objectURL;
+                link.download = "myFileName.pdf";
+                document.body.appendChild(link);
+                link.click();
+                link.remove();
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+    <div class="wrapper"> 
+        <center>
+            <h1 class="heading">Upload and Download The Files</h1>
+    <input type="file" id="input" /><br><br>
+    <button type="button" id="btn" class="btn btn-outline-primary"  onclick='DownloadFile()';>Download</button>
+</center>
+</div>
+</body>
+</html>
